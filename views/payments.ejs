@@ -1,0 +1,54 @@
+<%- include('header'); -%>
+
+	<h4>Payments History(<%= payments.length %>)  <button class="btn btn-primary pull-right"><a href="/admin/addPayment" style="color:#fff"><i class="glyphicon glyphicon-plus"></i> Add Payment</a></button></h4>
+	 <% if (messages.success) { %>
+    <div class="alert alert-success" role="alert"><%- messages.success %></div>
+    <% } %>
+
+    <% if (messages.error) { %>
+    <div class="alert alert-danger" role="alert"><%- messages.error %></div>
+    <% } %>
+	<table class="table table-bordered">
+		<thead>
+			<th></th>
+			<th>Patient Name</th>
+			<th>Payment Date</th>
+			<th>Amount Paid</th>
+			<th>Balance</th>
+			<th></th>
+		</thead>
+		<tbody>
+
+  		<!-- Loop through payments -->
+	  <% for(var i = 0; i < payments.length; i++) {%>
+	    <tr class="employee">
+	      <td><%= i + 1 %></td>:
+	      <td><%= payments[i].fullname  %></td>:
+	      <td><%= payments[i].paymentdate %></td>
+	      <td><%= payments[i].amountpaid %></td>
+	      <td><%= payments[i].balanceamount %></td>
+	      <td>
+	      	<div class="btn-group" role="group" aria-label="">
+  				<a href="/admin/editPayment/<%= payments[i]._id %>" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+  				<a href="/admin/deletePayment/<%= payments[i]._id %>" onclick="return alert('Are You sure?')"  class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
+			</div>
+	      </td>
+	    </tr>
+	  <% } %>
+	  <% if (payments.length == 0)  { %>
+	  <tr >
+	  	<td colspan="5"><div class="alert alert-warning" role="alert"> No Payment transaction(s) found</div></td>
+	  </tr>
+	  <% } %>
+	  <tr >
+	  	<td colspan="3">Total Payments: </td>
+	  	<td><span style="border-bottom: double">GHS: <%= 2000 %></span></td>
+	  	<td><span style="border-bottom: double">GHS: <%= 1200 %></span></td>
+	  	<td></td>
+	  </tr>
+
+
+	</table>
+	  
+
+<%- include('footer'); -%>
